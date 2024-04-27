@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import { WeatherInput } from "./WeatherInput";
 
 const API_KEY = "5ab6eb50c0cfc9e011bc1444d5839537";
 export const Weather = () => {
 
     const [weather, setWeather] = useState(null);
+    const [inputCity, setInputCity] = useState("");
 
-
-    {/* todo gérer l'input de la ville*/}
-
-    const cityInput = 'Lille'
+   
 
     const getWeather = async () => {
         const response = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
             params: {
-                q: cityInput, //q=city
+                q: inputCity,
                 appid: API_KEY,
                 units: 'metric',
             }
@@ -26,10 +25,17 @@ export const Weather = () => {
     }
 
     useEffect(() => {
-        getWeather();
-    }, []);
+        if (inputCity){
+            getWeather();
+        }
+    }, [inputCity]);
 
     return ( <> 
+            <div> 
+                <p> input2 : </p>
+                <WeatherInput inputText={inputCity} setInputText={setInputCity} />
+            </div>
+
             <div>
                 <h1>Résultat de la requête : </h1>
                 <p>{JSON.stringify(weather)} </p>
