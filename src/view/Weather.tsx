@@ -16,7 +16,7 @@ export const Weather = () => {
     }
 
 
-    return (<></>);
+    return (<> <p>LE RETOUR DE l'APP WEATHER SERA ICI </p> </>);
 
 
 };
