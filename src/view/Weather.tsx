@@ -30,6 +30,14 @@ export const Weather = () => {
         }
     }, [inputCity]);
 
+    const getCoords = (weather: any) => 
+        {if (weather) {
+            JSON.stringify(weather.coord)
+        } else {
+            ""
+        }
+    }
+
     return ( <> 
             <div> 
                 <p> input2 : </p>
@@ -38,9 +46,13 @@ export const Weather = () => {
 
             <div>
                 <h1>Résultat de la requête : </h1>
+                <p> { getCoords(weather) } </p>
+
+                <p> ========================= </p>
                 <p>{JSON.stringify(weather)} </p>
 
                 <pre>{JSON.stringify(weather, null, 2)}</pre>    {/* vient de stackoverflow.com/questions/30765163/pretty-printing-json-with-react */}
+                
             </div>
         </> );
 
