@@ -27,7 +27,7 @@ export const WeatherResults = (
 
     } else return (
     <div>
-                <p>Météo pour {inputCity} </p>
+                <p className="title2">Météo pour {inputCity} </p>
                 <ul>
                     <li> Temps actuel : { getCurrentWeatherDescription(weatherJSON) }  </li>
                     <li> </li>
