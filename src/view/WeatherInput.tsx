@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 
 
-/* todo facultatif : faire entrée dans le input devrait MAJ inputText*/
+/* todo facultatif : faire "entrée" dans le input devrait MAJ inputText*/
 
 /* inspiré de : codefrontend.com/reactjs-get-input-value/   */
 /* je spécifie les types ici car la type inference ne marchait pas correctement  */

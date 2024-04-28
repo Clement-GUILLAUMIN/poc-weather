@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { WeatherInput } from "./WeatherInput";
+import { WeatherResults } from "./WeatherResults"
+import { Error404 } from "./Error"
 
 const API_KEY = "5ab6eb50c0cfc9e011bc1444d5839537";
 export const Weather = () => {
@@ -42,12 +44,19 @@ export const Weather = () => {
     }
 
     return ( <> 
+
+            <h1>Météo pour une ville donnée </h1>
+
             <div> 
                 <WeatherInput inputText={inputCity} setInputText={setInputCity} />
             </div>
+            
+            <div>
+                <WeatherResults />
+            </div>
 
             <div>
-                <h1>Météo pour {inputCity} : </h1>
+                <p>Météo pour {inputCity} </p>
                 <p> { getCurrentWeatherDescription(weatherJSON) } </p>
 
                 <p> ========================= </p>
