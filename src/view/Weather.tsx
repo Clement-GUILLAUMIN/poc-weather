@@ -5,21 +5,22 @@ import { WeatherInput } from "./WeatherInput";
 const API_KEY = "5ab6eb50c0cfc9e011bc1444d5839537";
 export const Weather = () => {
 
-    const [weather, setWeather] = useState(null);
+    const [weatherJSON, setWeatherJSON] = useState(null);
     const [inputCity, setInputCity] = useState("");
     const [hasError, setHasError] = useState(false);
 
    
 
-    const getWeatherResults = async () => {
+    const getWeatherJSON = async () => {
         const response = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
             params: {
                 q: inputCity,
                 appid: API_KEY,
                 units: 'metric',
+                lang: 'fr',
             }
         });
-        setWeather(response.data);
+        setWeatherJSON(response.data);
 
 
 
@@ -27,13 +28,14 @@ export const Weather = () => {
 
     useEffect(() => {
         if (inputCity){
-            getWeatherResults();
+            getWeatherJSON();
         }
     }, [inputCity]);
 
-    const getCoords = (weather: any) => 
-        {if (weather) {
-            return JSON.stringify(weather.coord)
+    const getCurrentWeatherDescription = (weatherJSON: any) => 
+        {if (weatherJSON) {
+            const weather = weatherJSON.weather[0]
+            return JSON.stringify(weather.description)
         } else {
             return ""
         }
@@ -46,12 +48,12 @@ export const Weather = () => {
 
             <div>
                 <h1>Météo pour {inputCity} : </h1>
-                <p> { getCoords(weather) } </p>
+                <p> { getCurrentWeatherDescription(weatherJSON) } </p>
 
                 <p> ========================= </p>
-                <p>{JSON.stringify(weather)} </p>
+                <p>{JSON.stringify(weatherJSON)} </p>
 
-                <pre>{JSON.stringify(weather, null, 2)}</pre>    {/* vient de stackoverflow.com/questions/30765163/pretty-printing-json-with-react */}
+                <pre>{JSON.stringify(weatherJSON, null, 2)}</pre>    {/* vient de stackoverflow.com/questions/30765163/pretty-printing-json-with-react */}
                 
             </div>
         </> );
