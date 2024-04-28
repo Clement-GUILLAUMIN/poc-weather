@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { WeatherInput } from "./WeatherInput";
 import { WeatherResults } from "./WeatherResults"
-import { Error404 } from "./Error"
 
 const API_KEY = "5ab6eb50c0cfc9e011bc1444d5839537";
 export const Weather = () => {
@@ -10,6 +9,7 @@ export const Weather = () => {
     const [weatherJSON, setWeatherJSON] = useState(null);
     const [inputCity, setInputCity] = useState("");
     const [hasError, setHasError] = useState(false);
+    const [queryHasBeenSent, setQueryHasBeenSent ] = useState(false) ;
 
    
 
@@ -34,14 +34,7 @@ export const Weather = () => {
         }
     }, [inputCity]);
 
-    const getCurrentWeatherDescription = (weatherJSON: any) => 
-        {if (weatherJSON) {
-            const weather = weatherJSON.weather[0]
-            return JSON.stringify(weather.description)
-        } else {
-            return ""
-        }
-    }
+    
 
     return ( <> 
 
@@ -52,19 +45,10 @@ export const Weather = () => {
             </div>
             
             <div>
-                <WeatherResults />
+                {queryHasBeenSent && <WeatherResults hasError={hasError} weatherJSON={weatherJSON} inputCity={inputCity} /> }
             </div>
 
-            <div>
-                <p>Météo pour {inputCity} </p>
-                <p> { getCurrentWeatherDescription(weatherJSON) } </p>
-
-                <p> ========================= </p>
-                <p>{JSON.stringify(weatherJSON)} </p>
-
-                <pre>{JSON.stringify(weatherJSON, null, 2)}</pre>    {/* vient de stackoverflow.com/questions/30765163/pretty-printing-json-with-react */}
-                
-            </div>
+            
         </> );
 
 

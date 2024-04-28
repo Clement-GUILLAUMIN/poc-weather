@@ -7,7 +7,7 @@ import { ChangeEvent, useState } from "react";
 /* je spécifie les types ici car la type inference ne marchait pas correctement  */
 
 export const WeatherInput = (
-    { inputText, setInputText}
+    { inputText, setInputText }
     : { inputText : string;
         setInputText: React.Dispatch<React.SetStateAction<string>>; 
     }       
