@@ -7,10 +7,11 @@ export const Weather = () => {
 
     const [weather, setWeather] = useState(null);
     const [inputCity, setInputCity] = useState("");
+    const [hasError, setHasError] = useState(false);
 
    
 
-    const getWeather = async () => {
+    const getWeatherResults = async () => {
         const response = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
             params: {
                 q: inputCity,
@@ -26,26 +27,25 @@ export const Weather = () => {
 
     useEffect(() => {
         if (inputCity){
-            getWeather();
+            getWeatherResults();
         }
     }, [inputCity]);
 
     const getCoords = (weather: any) => 
         {if (weather) {
-            JSON.stringify(weather.coord)
+            return JSON.stringify(weather.coord)
         } else {
-            ""
+            return ""
         }
     }
 
     return ( <> 
             <div> 
-                <p> input2 : </p>
                 <WeatherInput inputText={inputCity} setInputText={setInputCity} />
             </div>
 
             <div>
-                <h1>Résultat de la requête : </h1>
+                <h1>Météo pour {inputCity} : </h1>
                 <p> { getCoords(weather) } </p>
 
                 <p> ========================= </p>

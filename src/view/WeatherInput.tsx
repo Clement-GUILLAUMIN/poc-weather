@@ -1,8 +1,10 @@
 import { ChangeEvent, useState } from "react";
 
 
-{/* inspiré de : codefrontend.com/reactjs-get-input-value/   */}
-{/* je spécifie les types ici car la type inference ne marchait pas correctement  */}
+/* todo facultatif : faire entrée dans le input devrait MAJ inputText*/
+
+/* inspiré de : codefrontend.com/reactjs-get-input-value/   */
+/* je spécifie les types ici car la type inference ne marchait pas correctement  */
 
 export const WeatherInput = (
     { inputText, setInputText}
@@ -10,15 +12,21 @@ export const WeatherInput = (
         setInputText: React.Dispatch<React.SetStateAction<string>>; 
     }       
 ) => {
+  const [currentInputText, setCurrentInputText] = useState('')
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputText(e.target.value);
+    setCurrentInputText(e.target.value);
   };
+
+  const handleClick = () => {
+    setInputText(currentInputText)
+  }
 
   return (
     <div>
-      <input type="text" onChange={handleChange} value={inputText} />
-
-      <p>input: {inputText}</p>
+      <input type="text" onChange={handleChange} value={currentInputText} />
+      <button onClick={handleClick}>Afficher informations</button>
+      
     </div>
   );
 };
