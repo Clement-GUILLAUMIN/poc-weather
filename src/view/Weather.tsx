@@ -14,6 +14,7 @@ export const Weather = () => {
    
 
     const getWeatherJSON = async () => {
+        setQueryHasBeenSent(true);
         const response = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
             params: {
                 q: inputCity,
